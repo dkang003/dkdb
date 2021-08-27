@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../config/database');
 const User = require('../models/User');
+const verify = require('../middleware/verifyToken');
 
-router.get('/test', (req,res) => {
+router.get('/test', verify, (req,res) => {
+    console.log(req.user);
     User.findAll()
     .then( users => { 
         console.log(users);
